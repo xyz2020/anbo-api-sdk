@@ -5,12 +5,12 @@
 
 ## 获取SDK方式
 ### 一、源码编译
-1.git clone https://github.com/xyz2020/anbo-api-sdk.git
-2.maven下载依赖
-3.maven clean 
-4.maven compile
-5.maven package生成target目录以及其中文件sign-*.jar
-6.将jar包引入项目即可
+    1.git clone https://github.com/xyz2020/anbo-api-sdk.git
+    2.maven下载依赖
+    3.maven clean 
+    4.maven compile
+    5.maven package生成target目录以及其中文件sign-*.jar
+    6.将jar包引入项目
 
 ### 二、直接下载编译后的jar包文件
 下载地址：
@@ -21,17 +21,17 @@
 
 ## api-sdk方法说明及示例
 ### 核心方法
-1.KeyPair initKey()
+    1.KeyPair initKey()
     创建密钥对
-2.String sign(HashMap<String,String> data)
+    2.String sign(HashMap<String,String> data)
     执行签名：返回字符串。
     data：需要签名的数据，指定传入map格式。
-3.boolean verify(String publKeyStr, HashMap<String,String> data, String sign)
+    3.boolean verify(String publKeyStr, HashMap<String,String> data, String sign)
     验证签名：返回true，验签成功；返回false，验签失败。
     publKeyStr：公钥
     data：需要签名的数据，指定传入map格式。
     sign：签名后的字符串
-    
+> 代码示例
 ```$java
         JDK8SignECC jdk8SignECC = new JDK8SignECC();
         HashMap<String,String> map = new HashMap<>();
@@ -53,13 +53,13 @@
 
 ```
 ### 辅助方法
-1.String getPublicKey(KeyPair keyPair)
+    1.String getPublicKey(KeyPair keyPair)
     根据密钥对得到字符串类型的公钥。
-2.String getPrivateKey(KeyPair keyPair)
+    2.String getPrivateKey(KeyPair keyPair)
     根据密钥对得到字符串类型的私钥。
-3.PublicKey string2PublicKey(String pubStr)
+    3.PublicKey string2PublicKey(String pubStr)
     根据字符串类型公钥得到公钥对象。
-4.PrivateKey string2PrivateKey(String priStr)
+    4.PrivateKey string2PrivateKey(String priStr)
     根据字符串类型私钥得到私钥对象。
-5.byte[] dataMap2byte(HashMap<String,String> data)
+    5.byte[] dataMap2byte(HashMap<String,String> data)
     对需要签名的map数据，排序后得到一个字节数组。该字节数组用于签名。
