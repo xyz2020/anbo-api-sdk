@@ -19,6 +19,13 @@
 ## 私钥文件存放
 > 将私钥文件放置到项目的资源文件夹（resources）下。
 
+文件内容示例:
+```$xslt
+{
+	"pub_key":"MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE1SmTD9+hRzZB4NXZnfPpRkRayW8RUQ0JeLAJEqap07C8MLe/jC4nP4b7SsNBfEzneZAdmn6gfXY7DwAXInBR6w==",
+	"priv_key":"MEECAQAwEwYHKoZIzj0CAQYIKoZIzj0DAQcEJzAlAgEBBCCGk6jWcuKK/9N0M/CKEEGh84VGRlGV+sXct+i0IY09ng=="
+}
+```
 ## api-sdk方法说明及示例
 ### 核心方法
     1.KeyPair initKey()
