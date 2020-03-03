@@ -34,10 +34,10 @@
 ### 核心方法
     1.AnboECCKey => String generateKeyPair()
     创建密钥对
-    2.AnboECCSign => sign(Map<String,String> data)
+    2.AnboECCSign => String sign(Map<String,String> data)
     执行签名：返回字符串。
     data：需要签名的数据，指定传入map格式。
-    3.AnboECCSign => boolean verify(String publKeyStr, Map<String,String> data, String sign)
+    3.AnboECCVerify => boolean verify(String publKeyStr, Map<String,String> data, String sign)
     验证签名：返回true，验签成功；返回false，验签失败。
     publKeyStr：公钥
     data：需要签名的数据，指定传入map格式。
@@ -62,6 +62,7 @@
 
 ```
         //验签
+        AnboECCVerify anboECCVerify = new AnboECCVerify();
         Map<String,String> map = new HashMap<>();
         map.put("accountType","1");
         map.put("address","北京市朝阳区中电发展大厦");
@@ -71,6 +72,6 @@
         map.put("accountName","张三");
         String sign = "MEQCIGyJWpeBk+i64XTF9c4TE96LP+W4O4BYHSBFLEEYIC6VAiB8XYSItDaiaDgzvpsehs1RQ54l30h2YPYwF87Z5kC/nQ==";
         String pubKey = "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE1SmTD9+hRzZB4NXZnfPpRkRayW8RUQ0JeLAJEqap07C8MLe/jC4nP4b7SsNBfEzneZAdmn6gfXY7DwAXInBR6w==";
-        Boolean check = AnboECCVerify.verify(pubKey,map,sign);
+        Boolean check = anboECCVerify.verify(pubKey,map,sign);
         System.out.println("check:"+check);
 ```

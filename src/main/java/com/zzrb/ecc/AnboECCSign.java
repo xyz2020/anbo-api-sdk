@@ -14,7 +14,7 @@ public class AnboECCSign{
     private static final String privKey = "priv_key";
 
     //私钥文件中私钥
-    static String privateKeyStr;
+    private static String privateKeyStr;
 
     static {
         privateKeyStr = getPrivateKeyStrByResources();

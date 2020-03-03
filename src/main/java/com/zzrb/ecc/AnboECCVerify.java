@@ -16,8 +16,9 @@ public class AnboECCVerify{
         byte[] dataBytes = ECCUtil.dataMap2byte(data);
         return verify(publicKey,dataBytes,signBytes);
     }
+
     // 验证签名
-    private static boolean verify(PublicKey publicKey, byte[] data, byte[] sign) throws Exception {
+    private boolean verify(PublicKey publicKey, byte[] data, byte[] sign) throws Exception {
         // 3.验证签名[公钥验签]
         Signature signature = Signature.getInstance(ECCUtil.SIGNALGORITHM);
         signature.initVerify(publicKey);
