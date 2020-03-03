@@ -96,7 +96,7 @@ public class JDK8SignECC {
     }
 
     //将Base64编码后的公钥转换成PublicKey对象
-    public PublicKey string2PublicKey(String pubStr) throws Exception{
+    public static PublicKey string2PublicKey(String pubStr) throws Exception{
         byte[] keyBytes = Base64.getDecoder().decode(pubStr);
         X509EncodedKeySpec keySpec = new X509EncodedKeySpec(keyBytes);
         KeyFactory keyFactory = KeyFactory.getInstance(JDK8SignECC.EC);
@@ -114,7 +114,7 @@ public class JDK8SignECC {
     }
 
     // 源数据的map,排序，拼接字符串：k1=v1k2=v2k3=v3,返回byte数组
-    public byte[] dataMap2byte(HashMap<String,String> data){
+    public static byte[] dataMap2byte(HashMap<String, String> data){
         // 先将参数以其参数名的字典序升序进行排序
         Map<String, String> sortedParams = new TreeMap<String, String>(data);
         Set<Map.Entry<String, String>> entrys = sortedParams.entrySet();
@@ -139,14 +139,14 @@ public class JDK8SignECC {
     }
 
     // 验证签名
-    public boolean verify(String publKeyStr, HashMap<String,String> data, String sign) throws Exception {
+    public static boolean verify(String publKeyStr, HashMap<String,String> data, String sign) throws Exception {
         PublicKey publicKey = string2PublicKey(publKeyStr);
         byte[] signBytes = Base64.getDecoder().decode(sign);
         byte[] dataBytes = dataMap2byte(data);
         return verify(publicKey,dataBytes,signBytes);
     }
     // 验证签名
-    public boolean verify(PublicKey publicKey, byte[] data, byte[] sign) throws Exception {
+    public static boolean verify(PublicKey publicKey, byte[] data, byte[] sign) throws Exception {
         // 3.验证签名[公钥验签]
         Signature signature = Signature.getInstance(JDK8SignECC.SIGNALGORITHM);
         signature.initVerify(publicKey);

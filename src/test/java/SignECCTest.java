@@ -1,4 +1,3 @@
-import com.alibaba.fastjson.JSONObject;
 import com.zzrb.sign.JDK8SignECC;
 import org.junit.Test;
 
@@ -24,7 +23,7 @@ public class SignECCTest {
         System.out.println("sign:"+sign);
 
         String pubKey = "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE1SmTD9+hRzZB4NXZnfPpRkRayW8RUQ0JeLAJEqap07C8MLe/jC4nP4b7SsNBfEzneZAdmn6gfXY7DwAXInBR6w==";
-        Boolean check = jdk8SignECC.verify(pubKey,map,sign);
+        Boolean check = JDK8SignECC.verify(pubKey,map,sign);
         System.out.println("check:"+check);
 
     }

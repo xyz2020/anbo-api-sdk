@@ -8,10 +8,6 @@
     <artifactId>sign</artifactId>
     <version>1.0.0</version>
 
-    <properties>
-        <spring.version>4.0.8.RELEASE</spring.version>
-    </properties>
-
     <build>
         <plugins>
             <plugin>
@@ -33,11 +29,6 @@
     </build>
 
     <dependencies>
-<!--        <dependency>-->
-<!--            <groupId>org.bouncycastle</groupId>-->
-<!--            <artifactId>bcprov-jdk15on</artifactId>-->
-<!--            <version>1.60</version>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
@@ -49,7 +40,6 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
 
 </project>
