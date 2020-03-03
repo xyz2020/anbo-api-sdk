@@ -1,4 +1,4 @@
-package com.zzrb.sign;
+package com.zzrb.ecc;
 
 import com.zzrb.util.ECCUtil;
 

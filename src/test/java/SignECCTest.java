@@ -1,6 +1,6 @@
-import com.zzrb.sign.AnboECCKey;
-import com.zzrb.sign.AnboECCSign;
-import com.zzrb.sign.AnboECCVerify;
+import com.zzrb.ecc.AnboECCKey;
+import com.zzrb.ecc.AnboECCSign;
+import com.zzrb.ecc.AnboECCVerify;
 import org.junit.Test;
 
 import java.util.HashMap;
