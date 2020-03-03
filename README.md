@@ -16,10 +16,13 @@
 下载地址：
 > https://github.com/xyz2020/anbo-api-sdk/tree/master/download
 
-## 私钥文件存放
+## 私钥文件说明
 > 将私钥文件放置到项目的资源文件夹（resources）下。
+> 注意：
+>   1.文件名称要求必须是private_key.json。
+>   2.该私钥文件文件必须由开发者跟项目方申请，才能做api联调，自己创建的公私钥无法联调。项目方会进行公私钥的备案。
 
-文件内容示例:
+私钥文件内容示例:
 ```$xslt
 {
 	"pub_key":"MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE1SmTD9+hRzZB4NXZnfPpRkRayW8RUQ0JeLAJEqap07C8MLe/jC4nP4b7SsNBfEzneZAdmn6gfXY7DwAXInBR6w==",
@@ -30,10 +33,10 @@
 ### 核心方法
     1.KeyPair initKey()
     创建密钥对
-    2.String sign(HashMap<String,String> data)
+    2.String sign(Map<String,String> data)
     执行签名：返回字符串。
     data：需要签名的数据，指定传入map格式。
-    3.boolean verify(String publKeyStr, HashMap<String,String> data, String sign)
+    3.boolean verify(String publKeyStr, Map<String,String> data, String sign)
     验证签名：返回true，验签成功；返回false，验签失败。
     publKeyStr：公钥
     data：需要签名的数据，指定传入map格式。
@@ -55,7 +58,7 @@
         System.out.println("sign:"+sign);
 
         String pubKey = "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE1SmTD9+hRzZB4NXZnfPpRkRayW8RUQ0JeLAJEqap07C8MLe/jC4nP4b7SsNBfEzneZAdmn6gfXY7DwAXInBR6w==";
-        Boolean check = jdk8SignECC.verify(pubKey,map,sign);
+        Boolean check = JDK8SignECC.verify(pubKey,map,sign);
         System.out.println("check:"+check);
 
 ```
@@ -68,5 +71,5 @@
     根据字符串类型公钥得到公钥对象。
     4.PrivateKey string2PrivateKey(String priStr)
     根据字符串类型私钥得到私钥对象。
-    5.byte[] dataMap2byte(HashMap<String,String> data)
+    5.byte[] dataMap2byte(Map<String,String> data)
     对需要签名的map数据，排序后得到一个字节数组。该字节数组用于签名。

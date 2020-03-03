@@ -8,7 +8,7 @@ import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.*;
 
-public class JDK8SignECC {
+public class AnboECCSign {
 
 
     public static final String EC = "EC";    //密码原理
@@ -27,8 +27,8 @@ public class JDK8SignECC {
     }
 
     //从classpath中获取private_key.json文件
-    public static String getPrivateKeyStrByResources(){
-        InputStream is = JDK8SignECC.class.getClass().getResourceAsStream(fileName);
+    private static String getPrivateKeyStrByResources(){
+        InputStream is = AnboECCSign.class.getClass().getResourceAsStream(fileName);
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
         String s="";
         String configContentStr = "";
@@ -43,36 +43,14 @@ public class JDK8SignECC {
         return jsonObject.get(privKey).toString();
     }
 
-//    //私钥默认读取路径
-//    public static final String userHome = "user.home";
-//    public static final String filePath = "/temp/key";
-//    // 初始化privateKeyStr，从用户目录的.anbo/key/private_key.json文件中读取
-//    public static String getPrivateKeyStr(){
-//        String home = System.getProperties().getProperty(userHome);
-//        String fullpath = home + filePath +"/" +fileName;
-//        String content = "";
-//        try {
-//            FileReader fileReader = new FileReader(fullpath);
-//            BufferedReader bufferedReader = new BufferedReader(fileReader);
-//            String strLine;
-//            while ((strLine = bufferedReader.readLine()) != null) {
-//                content =content + strLine;
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        JSONObject jsonObject = JSONObject.parseObject(content);
-//        return jsonObject.get(privKey).toString();
-//    }
-
 
     // 公私钥生成
-    public  KeyPair initKey() throws Exception {
+    public KeyPair initKey() throws Exception {
         return initKey(KEYSIZE, new SecureRandom().generateSeed(8));
     }
 
     public KeyPair initKey(int keySize, byte[] seed) throws Exception {
-        KeyPairGenerator keygen = KeyPairGenerator.getInstance(JDK8SignECC.EC);
+        KeyPairGenerator keygen = KeyPairGenerator.getInstance(AnboECCSign.EC);
         // 初始化随机产生器
         SecureRandom secureRandom = new SecureRandom();
         secureRandom.setSeed(seed);
@@ -99,7 +77,7 @@ public class JDK8SignECC {
     public static PublicKey string2PublicKey(String pubStr) throws Exception{
         byte[] keyBytes = Base64.getDecoder().decode(pubStr);
         X509EncodedKeySpec keySpec = new X509EncodedKeySpec(keyBytes);
-        KeyFactory keyFactory = KeyFactory.getInstance(JDK8SignECC.EC);
+        KeyFactory keyFactory = KeyFactory.getInstance(AnboECCSign.EC);
         PublicKey publicKey = keyFactory.generatePublic(keySpec);
         return publicKey;
     }
@@ -108,13 +86,13 @@ public class JDK8SignECC {
     public PrivateKey string2PrivateKey(String priStr) throws Exception{
         byte[] keyBytes = Base64.getDecoder().decode(priStr);
         PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(keyBytes);
-        KeyFactory keyFactory = KeyFactory.getInstance(JDK8SignECC.EC);
+        KeyFactory keyFactory = KeyFactory.getInstance(AnboECCSign.EC);
         PrivateKey privateKey = keyFactory.generatePrivate(keySpec);
         return privateKey;
     }
 
     // 源数据的map,排序，拼接字符串：k1=v1k2=v2k3=v3,返回byte数组
-    public static byte[] dataMap2byte(Map<String, String> data){
+    private static byte[] dataMap2byte(Map<String, String> data){
         // 先将参数以其参数名的字典序升序进行排序
         Map<String, String> sortedParams = new TreeMap<String, String>(data);
         Set<Map.Entry<String, String>> entrys = sortedParams.entrySet();
@@ -132,7 +110,7 @@ public class JDK8SignECC {
         PrivateKey privateKey = string2PrivateKey(privateKeyStr);
         byte[] dataBytes = dataMap2byte(data);
         // 2.执行签名[私钥签名]
-        Signature signature = Signature.getInstance(JDK8SignECC.SIGNALGORITHM);
+        Signature signature = Signature.getInstance(AnboECCSign.SIGNALGORITHM);
         signature.initSign(privateKey);
         signature.update(dataBytes);
         return Base64.getEncoder().encodeToString(signature.sign());
@@ -146,9 +124,9 @@ public class JDK8SignECC {
         return verify(publicKey,dataBytes,signBytes);
     }
     // 验证签名
-    public static boolean verify(PublicKey publicKey, byte[] data, byte[] sign) throws Exception {
+    private static boolean verify(PublicKey publicKey, byte[] data, byte[] sign) throws Exception {
         // 3.验证签名[公钥验签]
-        Signature signature = Signature.getInstance(JDK8SignECC.SIGNALGORITHM);
+        Signature signature = Signature.getInstance(AnboECCSign.SIGNALGORITHM);
         signature.initVerify(publicKey);
         signature.update(data);
         return signature.verify(sign);
