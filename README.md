@@ -32,45 +32,45 @@
 ```
 ## api-sdk方法说明及示例
 ### 核心方法
-    1.KeyPair initKey()
+    1.AnboECCKey => String generateKeyPair()
     创建密钥对
-    2.String sign(Map<String,String> data)
+    2.AnboECCSign => sign(Map<String,String> data)
     执行签名：返回字符串。
     data：需要签名的数据，指定传入map格式。
-    3.boolean verify(String publKeyStr, Map<String,String> data, String sign)
+    3.AnboECCSign => boolean verify(String publKeyStr, Map<String,String> data, String sign)
     验证签名：返回true，验签成功；返回false，验签失败。
     publKeyStr：公钥
     data：需要签名的数据，指定传入map格式。
     sign：签名后的字符串
 > 代码示例
 ```$java
-        JDK8SignECC jdk8SignECC = new JDK8SignECC();
-        HashMap<String,String> map = new HashMap<>();
-
+        //签名
+        AnboECCSign anboECCSign = new AnboECCSign();
+        Map<String,String> map = new HashMap<>();
         map.put("accountType","1");
         map.put("address","北京市朝阳区中电发展大厦");
         map.put("name","张三");
         map.put("bankName","招商银行");
         map.put("accountNo","6225888888888888");
         map.put("accountName","张三");
+        System.out.println("map:"+map);
 
-        System.out.println("datamap:"+map);
-        String sign = jdk8SignECC.sign(map);
+        String sign = anboECCSign.sign(map);
         System.out.println("sign:"+sign);
 
-        String pubKey = "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE1SmTD9+hRzZB4NXZnfPpRkRayW8RUQ0JeLAJEqap07C8MLe/jC4nP4b7SsNBfEzneZAdmn6gfXY7DwAXInBR6w==";
-        Boolean check = JDK8SignECC.verify(pubKey,map,sign);
-        System.out.println("check:"+check);
+```
 
 ```
-### 辅助方法
-    1.String getPublicKey(KeyPair keyPair)
-    根据密钥对得到字符串类型的公钥。
-    2.String getPrivateKey(KeyPair keyPair)
-    根据密钥对得到字符串类型的私钥。
-    3.PublicKey string2PublicKey(String pubStr)
-    根据字符串类型公钥得到公钥对象。
-    4.PrivateKey string2PrivateKey(String priStr)
-    根据字符串类型私钥得到私钥对象。
-    5.byte[] dataMap2byte(Map<String,String> data)
-    对需要签名的map数据，排序后得到一个字节数组。该字节数组用于签名。
+        //验签
+        Map<String,String> map = new HashMap<>();
+        map.put("accountType","1");
+        map.put("address","北京市朝阳区中电发展大厦");
+        map.put("name","张三");
+        map.put("bankName","招商银行");
+        map.put("accountNo","6225888888888888");
+        map.put("accountName","张三");
+        String sign = "MEQCIGyJWpeBk+i64XTF9c4TE96LP+W4O4BYHSBFLEEYIC6VAiB8XYSItDaiaDgzvpsehs1RQ54l30h2YPYwF87Z5kC/nQ==";
+        String pubKey = "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE1SmTD9+hRzZB4NXZnfPpRkRayW8RUQ0JeLAJEqap07C8MLe/jC4nP4b7SsNBfEzneZAdmn6gfXY7DwAXInBR6w==";
+        Boolean check = AnboECCVerify.verify(pubKey,map,sign);
+        System.out.println("check:"+check);
+```
