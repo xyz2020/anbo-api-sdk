@@ -114,7 +114,7 @@ public class JDK8SignECC {
     }
 
     // 源数据的map,排序，拼接字符串：k1=v1k2=v2k3=v3,返回byte数组
-    public static byte[] dataMap2byte(HashMap<String, String> data){
+    public static byte[] dataMap2byte(Map<String, String> data){
         // 先将参数以其参数名的字典序升序进行排序
         Map<String, String> sortedParams = new TreeMap<String, String>(data);
         Set<Map.Entry<String, String>> entrys = sortedParams.entrySet();
@@ -128,7 +128,7 @@ public class JDK8SignECC {
     }
 
     //执行签名
-    public String sign(HashMap<String,String> data) throws Exception {
+    public String sign(Map<String,String> data) throws Exception {
         PrivateKey privateKey = string2PrivateKey(privateKeyStr);
         byte[] dataBytes = dataMap2byte(data);
         // 2.执行签名[私钥签名]
@@ -139,7 +139,7 @@ public class JDK8SignECC {
     }
 
     // 验证签名
-    public static boolean verify(String publKeyStr, HashMap<String,String> data, String sign) throws Exception {
+    public static boolean verify(String publKeyStr, Map<String,String> data, String sign) throws Exception {
         PublicKey publicKey = string2PublicKey(publKeyStr);
         byte[] signBytes = Base64.getDecoder().decode(sign);
         byte[] dataBytes = dataMap2byte(data);
