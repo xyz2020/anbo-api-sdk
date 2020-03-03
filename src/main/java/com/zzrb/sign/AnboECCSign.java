@@ -1,14 +1,13 @@
 package com.zzrb.sign;
 
 import com.alibaba.fastjson.JSONObject;
+import com.zzrb.util.ECCUtil;
 
 import java.io.*;
 import java.security.*;
-import java.security.spec.PKCS8EncodedKeySpec;
-import java.security.spec.X509EncodedKeySpec;
 import java.util.*;
 
-public class AnboECCSign extends BaseECC{
+public class AnboECCSign{
 
     //私钥文件
     private static final String fileName = "/private_key.json";
@@ -40,10 +39,10 @@ public class AnboECCSign extends BaseECC{
 
     //执行签名
     public String sign(Map<String,String> data) throws Exception {
-        PrivateKey privateKey = string2PrivateKey(privateKeyStr);
-        byte[] dataBytes = dataMap2byte(data);
+        PrivateKey privateKey = ECCUtil.string2PrivateKey(privateKeyStr);
+        byte[] dataBytes = ECCUtil.dataMap2byte(data);
         // 2.执行签名[私钥签名]
-        Signature signature = Signature.getInstance(SIGNALGORITHM);
+        Signature signature = Signature.getInstance(ECCUtil.SIGNALGORITHM);
         signature.initSign(privateKey);
         signature.update(dataBytes);
         return Base64.getEncoder().encodeToString(signature.sign());

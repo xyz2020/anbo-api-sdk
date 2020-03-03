@@ -1,4 +1,4 @@
-package com.zzrb.sign;
+package com.zzrb.util;
 
 import java.security.*;
 import java.security.spec.PKCS8EncodedKeySpec;
@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-public class BaseECC {
+public class ECCUtil {
     public static final String EC = "EC";    //密码原理
     public static final String SIGNALGORITHM = "SHA256withECDSA";    //签名算法
     public static final int KEYSIZE = 256; //大小
@@ -23,7 +23,7 @@ public class BaseECC {
     }
 
     //将Base64编码后的私钥转换成PrivateKey对象
-    public PrivateKey string2PrivateKey(String priStr) throws Exception{
+    public static PrivateKey string2PrivateKey(String priStr) throws Exception{
         byte[] keyBytes = Base64.getDecoder().decode(priStr);
         PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(keyBytes);
         KeyFactory keyFactory = KeyFactory.getInstance(EC);

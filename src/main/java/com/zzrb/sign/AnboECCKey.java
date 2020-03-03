@@ -1,11 +1,12 @@
 package com.zzrb.sign;
 
 import com.alibaba.fastjson.JSONObject;
+import com.zzrb.util.ECCUtil;
 
 import java.security.*;
 import java.util.Base64;
 
-public class AnboECCKey extends BaseECC {
+public class AnboECCKey{
 
     public static String generateKeyPair() throws Exception{
         KeyPair keyPair = initKey();
@@ -17,11 +18,11 @@ public class AnboECCKey extends BaseECC {
 
     // 公私钥生成
     private static KeyPair initKey() throws Exception {
-        return initKey(KEYSIZE, new SecureRandom().generateSeed(8));
+        return initKey(ECCUtil.KEYSIZE, new SecureRandom().generateSeed(8));
     }
 
     private static KeyPair initKey(int keySize, byte[] seed) throws Exception {
-        KeyPairGenerator keygen = KeyPairGenerator.getInstance(EC);
+        KeyPairGenerator keygen = KeyPairGenerator.getInstance(ECCUtil.EC);
         // 初始化随机产生器
         SecureRandom secureRandom = new SecureRandom();
         secureRandom.setSeed(seed);

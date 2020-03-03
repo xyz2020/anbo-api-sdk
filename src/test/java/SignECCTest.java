@@ -1,7 +1,6 @@
 import com.zzrb.sign.AnboECCKey;
 import com.zzrb.sign.AnboECCSign;
 import com.zzrb.sign.AnboECCVerify;
-import com.zzrb.sign.BaseECC;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -33,6 +32,7 @@ public class SignECCTest {
 
     @Test
     public void check() throws Exception{
+        AnboECCVerify anboECCVerify = new AnboECCVerify();
         Map<String,String> map = new HashMap<>();
         map.put("accountType","1");
         map.put("address","北京市朝阳区中电发展大厦");
@@ -42,7 +42,7 @@ public class SignECCTest {
         map.put("accountName","张三");
         String sign = "MEQCIGyJWpeBk+i64XTF9c4TE96LP+W4O4BYHSBFLEEYIC6VAiB8XYSItDaiaDgzvpsehs1RQ54l30h2YPYwF87Z5kC/nQ==";
         String pubKey = "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE1SmTD9+hRzZB4NXZnfPpRkRayW8RUQ0JeLAJEqap07C8MLe/jC4nP4b7SsNBfEzneZAdmn6gfXY7DwAXInBR6w==";
-        Boolean check = AnboECCVerify.verify(pubKey,map,sign);
+        Boolean check = anboECCVerify.verify(pubKey,map,sign);
         System.out.println("check:"+check);
     }
 
