@@ -66,21 +66,18 @@
 
 ### 核心方法
 
-    1.AnboECCKey => String generateKeyPair()
-        创建密钥对
-    2.AnboECCSign => String sign(Map<String,String> data)
+    1.AnboECCSign => String sign(Map<String,String> data)
         执行签名：返回字符串。
         data：需要签名的数据，指定传入map格式。
-    3.AnboECCVerify => boolean verify(String publKeyStr, Map<String,String> data, String sign)
+    2.AnboECCVerify => boolean verify(Map<String,String> data, String sign)
         验证签名：返回true，验签成功；返回false，验签失败。
-        publKeyStr：公钥
         data：需要签名的数据，指定传入map格式。
         sign：签名后的字符串
-    4.AnboECCEncrypt => String encrypt(String data)
+    3.AnboECCEncrypt => String encrypt(String data)
         默认使用平台的公钥进行加密
         data:需要加密的数据
-    5.AnboECCDecrypt => String decrypt(String data)
-        平台使用私钥进行数据解密
+    4.AnboECCDecrypt => String decrypt(String data)
+        使用私钥进行数据解密
         data:加密后的数据
 
 > 代码示例

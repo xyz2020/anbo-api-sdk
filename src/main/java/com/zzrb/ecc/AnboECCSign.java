@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.zzrb.util.ECCUtil;
 import org.bouncycastle.jce.interfaces.ECPrivateKey;
 
+import javax.crypto.Cipher;
 import java.io.*;
 import java.security.*;
 import java.util.*;

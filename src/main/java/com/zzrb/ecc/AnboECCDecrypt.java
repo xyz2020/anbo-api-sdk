@@ -13,13 +13,13 @@ import java.util.Base64;
 
 public class AnboECCDecrypt {
 
-    private static final String fileName = "/anbo_priv_key.json";
+    private static final String fileName = "/key_pair.json";
     private static final String privkey = "priv_key";
     private static final String value = "value";
 
-    private static String anbo_priv_key;
+    private static String priv_key;
     static {
-        anbo_priv_key = getPubKeyStrByResources();
+        priv_key = getPubKeyStrByResources();
     }
 
     //从classpath中获取anbo_pub_key.json文件
@@ -42,7 +42,7 @@ public class AnboECCDecrypt {
 
     public String decrypt(String data) throws Exception {
         byte[] bytes = Base64.getDecoder().decode(data);
-        return new String(privateDecrypt(bytes,anbo_priv_key));
+        return new String(privateDecrypt(bytes,priv_key));
     }
 
     //私钥解密

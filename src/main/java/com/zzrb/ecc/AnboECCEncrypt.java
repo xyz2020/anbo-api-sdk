@@ -46,6 +46,11 @@ public class AnboECCEncrypt {
 
     }
 
+    //传入公钥加密
+    public String encrypt(String data, String publicKeyStr) throws Exception {
+        byte[] bytes = publicEncrypt(data.getBytes(),publicKeyStr);
+        return Base64.getEncoder().encodeToString(bytes);
+    }
 
     //公钥加密
     private byte[] publicEncrypt(byte[] data, String publicKeyStr) throws Exception{
