@@ -13,7 +13,7 @@
     2.maven下载依赖
     3.maven clean 
     4.maven compile
-    5.maven package生成target目录以及其中文件sign-*.jar
+    5.maven package生成target目录以及其中文件anbo-sdk-*.jar
     6.将jar包引入项目
 
 ### 二、直接下载编译后的jar包文件
