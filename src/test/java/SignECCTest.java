@@ -1,12 +1,31 @@
+import com.zzrb.ecc.AnboECCCrypt;
 import com.zzrb.ecc.AnboECCKey;
 import com.zzrb.ecc.AnboECCSign;
 import com.zzrb.ecc.AnboECCVerify;
+import com.zzrb.enumm.CityIdEnum;
 import org.junit.Test;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class SignECCTest {
+
+    @Test
+    public void testenum(){
+        System.out.println(CityIdEnum.getByTypeCode("010").getName());
+    }
+
+    @Test
+    public void crypt() throws Exception {
+        AnboECCCrypt anboECCCrypt = new AnboECCCrypt();
+
+        String data = "anbo";
+        String dataEncrypt = anboECCCrypt.encrypt(data);
+        System.out.println("dataEncrypt："+dataEncrypt);
+        String privateKey = "MIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQgtnckI8teu4j2G7uIREXhGBuG4RskNKT1xj6cIz0X21+gCgYIKoZIzj0DAQehRANCAATneXLI3jQlTMaCZLhDOT6c2eZsikoFKoUbkHXMMp1Q38Fn+ycJZum8a05b2T3g9vEa/QtHEoVLxAuwXDtt3T5D";
+        String dataDecrypt = anboECCCrypt.decrypt(dataEncrypt,privateKey);
+        System.out.println("dataDecrypt:" + dataDecrypt);
+    }
 
     @Test
     public void genKeyPair() throws Exception {
@@ -40,8 +59,8 @@ public class SignECCTest {
         map.put("bankName","招商银行");
         map.put("accountNo","6225888888888888");
         map.put("accountName","张三");
-        String sign = "MEQCIGyJWpeBk+i64XTF9c4TE96LP+W4O4BYHSBFLEEYIC6VAiB8XYSItDaiaDgzvpsehs1RQ54l30h2YPYwF87Z5kC/nQ==";
-        String pubKey = "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE1SmTD9+hRzZB4NXZnfPpRkRayW8RUQ0JeLAJEqap07C8MLe/jC4nP4b7SsNBfEzneZAdmn6gfXY7DwAXInBR6w==";
+        String sign = "MEUCIQCOPHb+g+jTgcPHApVxBZn4ducOXknNOkjK2oZQQhX+MwIgbnIzi/+cZzm9388t3fK6FWpYsjGsgveAPfMDFS+IKPk=";
+        String pubKey = "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE53lyyN40JUzGgmS4Qzk+nNnmbIpKBSqFG5B1zDKdUN/BZ/snCWbpvGtOW9k94PbxGv0LRxKFS8QLsFw7bd0+Qw==";
         Boolean check = anboECCVerify.verify(pubKey,map,sign);
 
         System.out.println("check:"+check);

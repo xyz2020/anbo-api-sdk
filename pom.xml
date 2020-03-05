@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.zzrb.ecc</groupId>
-    <artifactId>sign</artifactId>
+    <artifactId>anbo-sdk</artifactId>
     <version>1.0.0</version>
 
     <build>
@@ -29,6 +29,11 @@
     </build>
 
     <dependencies>
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk15on</artifactId>
+            <version>1.60</version>
+        </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
