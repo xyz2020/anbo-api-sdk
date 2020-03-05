@@ -1,11 +1,8 @@
 package com.zzrb.ecc;
 
 import com.zzrb.util.ECCUtil;
-import org.bouncycastle.jce.interfaces.ECPrivateKey;
 import org.bouncycastle.jce.interfaces.ECPublicKey;
 
-import java.security.PublicKey;
-import java.security.Security;
 import java.security.Signature;
 import java.util.Base64;
 import java.util.Map;

@@ -1,7 +1,4 @@
-import com.zzrb.ecc.AnboECCCrypt;
-import com.zzrb.ecc.AnboECCKey;
-import com.zzrb.ecc.AnboECCSign;
-import com.zzrb.ecc.AnboECCVerify;
+import com.zzrb.ecc.*;
 import com.zzrb.enumm.CityIdEnum;
 import org.junit.Test;
 
@@ -17,13 +14,12 @@ public class SignECCTest {
 
     @Test
     public void crypt() throws Exception {
-        AnboECCCrypt anboECCCrypt = new AnboECCCrypt();
-
+        AnboECCEncrypt anboECCEncrypt = new AnboECCEncrypt();
+        AnboECCDecrypt anboECCDecrypt = new AnboECCDecrypt();
         String data = "anbo";
-        String dataEncrypt = anboECCCrypt.encrypt(data);
+        String dataEncrypt = anboECCEncrypt.encrypt(data);
         System.out.println("dataEncrypt："+dataEncrypt);
-        String privateKey = "MIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQgtnckI8teu4j2G7uIREXhGBuG4RskNKT1xj6cIz0X21+gCgYIKoZIzj0DAQehRANCAATneXLI3jQlTMaCZLhDOT6c2eZsikoFKoUbkHXMMp1Q38Fn+ycJZum8a05b2T3g9vEa/QtHEoVLxAuwXDtt3T5D";
-        String dataDecrypt = anboECCCrypt.decrypt(dataEncrypt,privateKey);
+        String dataDecrypt = anboECCDecrypt.decrypt(dataEncrypt);
         System.out.println("dataDecrypt:" + dataDecrypt);
     }
 

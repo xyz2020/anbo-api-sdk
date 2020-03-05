@@ -16,10 +16,11 @@
 下载地址：
 > https://github.com/xyz2020/anbo-api-sdk/tree/master/download
 
-## 私钥文件说明
+## 私钥文件说明(平台发放,使用者妥善保管)
+
 > 将私钥文件放置到项目的资源文件夹（resources）下.
 
-    注意：
+    使用者注意：
     1. 文件名称要求必须是private_key.json。
     2. 该私钥文件文件必须由开发者跟项目方申请，才能做api联调，自己创建的公私钥无法联调。项目方会进行公私钥的备案。
 
@@ -38,8 +39,9 @@
 }
 ```
 
-> 平台公钥文件
+## 平台公钥文件(SDK中默认带有平台公钥)
 
+    注意:
     1.公钥文件放置在项目的资源文件夹（resources）下
     2.公钥文件名称:anbo_pub_key.json
     3.公钥文件中仅包含平台公钥,用于在调用api接口时对数据进行加密.
@@ -50,6 +52,23 @@
   "pub_key":{
     "type": "anbo/PubKeyECC",
     "value":"MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE53lyyN40JUzGgmS4Qzk+nNnmbIpKBSqFG5B1zDKdUN/BZ/snCWbpvGtOW9k94PbxGv0LRxKFS8QLsFw7bd0+Qw=="
+  }
+}
+```
+
+## 平台私钥文件(平台管理人员妥善保管)
+
+    注意:
+    1.私钥文件放置在项目的资源文件夹（resources）下
+    2.私钥文件名称:anbo_priv_key.json
+    3.私钥文件中包含私钥,也可包含公钥(可有可无),用于数据解密.
+
+私钥文件内容示例:
+```json
+{
+  "priv_key":{
+    "type": "anbo/PrivKeyECC",
+    "value":"MIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQgtnckI8teu4j2G7uIREXhGBuG4RskNKT1xj6cIz0X21+gCgYIKoZIzj0DAQehRANCAATneXLI3jQlTMaCZLhDOT6c2eZsikoFKoUbkHXMMp1Q38Fn+ycJZum8a05b2T3g9vEa/QtHEoVLxAuwXDtt3T5D"
   }
 }
 ```
@@ -66,13 +85,12 @@
         publKeyStr：公钥
         data：需要签名的数据，指定传入map格式。
         sign：签名后的字符串
-    4.AnboECCCrypt => String encrypt(String data)
+    4.AnboECCEncrypt => String encrypt(String data)
         默认使用平台的公钥进行加密
         data:需要加密的数据
-    5.AnboECCCrypt => String decrypt(String data, String privateKeyStr)
+    5.AnboECCDecrypt => String decrypt(String data)
         平台使用私钥进行数据解密
         data:加密后的数据
-        privateKeyStr:平台的私钥
 > 代码示例
 ```java
         //签名
@@ -109,12 +127,11 @@
 
 ```java
         //加密与解密
-        AnboECCCrypt anboECCCrypt = new AnboECCCrypt();
-
+        AnboECCEncrypt anboECCEncrypt = new AnboECCEncrypt();
+        AnboECCDecrypt anboECCDecrypt = new AnboECCDecrypt();
         String data = "anbo";
-        String dataEncrypt = anboECCCrypt.encrypt(data);
+        String dataEncrypt = anboECCEncrypt.encrypt(data);
         System.out.println("dataEncrypt："+dataEncrypt);
-        String privateKey = "MIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQgtnckI8teu4j2G7uIREXhGBuG4RskNKT1xj6cIz0X21+gCgYIKoZIzj0DAQehRANCAATneXLI3jQlTMaCZLhDOT6c2eZsikoFKoUbkHXMMp1Q38Fn+ycJZum8a05b2T3g9vEa/QtHEoVLxAuwXDtt3T5D";
-        String dataDecrypt = anboECCCrypt.decrypt(dataEncrypt,privateKey);
+        String dataDecrypt = anboECCDecrypt.decrypt(dataEncrypt);
         System.out.println("dataDecrypt:" + dataDecrypt);
 ```
