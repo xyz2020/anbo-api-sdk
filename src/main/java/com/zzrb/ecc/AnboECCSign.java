@@ -11,7 +11,7 @@ import java.util.*;
 public class AnboECCSign{
 
     //私钥文件
-    private static final String fileName = "/private_key.json";
+    private static final String fileName = "/key_pair.json";
     private static final String privKey = "priv_key";
     private static final String value = "value";
 

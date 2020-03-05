@@ -1,10 +1,14 @@
 # anbo-api-sdk 使用说明
+
 ## 运行环境
+
 1. JDK版本1.8及以上
 2. 编译工具maven
 
 ## 获取SDK方式
+
 ### 一、源码编译
+
     1.git clone https://github.com/xyz2020/anbo-api-sdk.git
     2.maven下载依赖
     3.maven clean 
@@ -13,6 +17,7 @@
     6.将jar包引入项目
 
 ### 二、直接下载编译后的jar包文件
+
 下载地址：
 > https://github.com/xyz2020/anbo-api-sdk/tree/master/download
 
@@ -21,7 +26,7 @@
 > 将私钥文件放置到项目的资源文件夹（resources）下.
 
     使用者注意：
-    1. 文件名称要求必须是private_key.json。
+    1. 文件名称要求必须是key_pair.json。
     2. 该私钥文件文件必须由开发者跟项目方申请，才能做api联调，自己创建的公私钥无法联调。项目方会进行公私钥的备案。
 
 私钥文件内容示例:
@@ -47,6 +52,7 @@
     3.公钥文件中仅包含平台公钥,用于在调用api接口时对数据进行加密.
 
 公钥文件内容示例:
+
 ```json
 {
   "pub_key":{
@@ -56,25 +62,10 @@
 }
 ```
 
-## 平台私钥文件(平台管理人员妥善保管)
-
-    注意:
-    1.私钥文件放置在项目的资源文件夹（resources）下
-    2.私钥文件名称:anbo_priv_key.json
-    3.私钥文件中包含私钥,也可包含公钥(可有可无),用于数据解密.
-
-私钥文件内容示例:
-```json
-{
-  "priv_key":{
-    "type": "anbo/PrivKeyECC",
-    "value":"MIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQgtnckI8teu4j2G7uIREXhGBuG4RskNKT1xj6cIz0X21+gCgYIKoZIzj0DAQehRANCAATneXLI3jQlTMaCZLhDOT6c2eZsikoFKoUbkHXMMp1Q38Fn+ycJZum8a05b2T3g9vEa/QtHEoVLxAuwXDtt3T5D"
-  }
-}
-```
-    
 ## api-sdk方法说明及示例
+
 ### 核心方法
+
     1.AnboECCKey => String generateKeyPair()
         创建密钥对
     2.AnboECCSign => String sign(Map<String,String> data)
@@ -91,7 +82,9 @@
     5.AnboECCDecrypt => String decrypt(String data)
         平台使用私钥进行数据解密
         data:加密后的数据
+
 > 代码示例
+
 ```java
         //签名
         AnboECCSign anboECCSign = new AnboECCSign();
