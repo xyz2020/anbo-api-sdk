@@ -1,6 +1,6 @@
 {
   "pub_key":{
-    "type": "anbo/PubKeyECC",
-    "value":"MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE53lyyN40JUzGgmS4Qzk+nNnmbIpKBSqFG5B1zDKdUN/BZ/snCWbpvGtOW9k94PbxGv0LRxKFS8QLsFw7bd0+Qw=="
+    "type":"anbo/PubKeyECC",
+    "value":"MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEP8oOm7jIx5HSNozIIjHKytaEy/a5VJksrhjYClmue/p9YRC0v+zVP2ajSoKPmnYoz6SV0MvzwlzzUUU5ZJiOnA=="
   }
 }
