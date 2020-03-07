@@ -13,7 +13,7 @@ import java.util.Base64;
 
 public class AnboECCDecrypt {
 
-    private static final String fileName = "/key_pair.json";
+    private static final String fileName = "key_pair.json";
     private static final String privkey = "priv_key";
     private static final String value = "value";
 
@@ -24,7 +24,7 @@ public class AnboECCDecrypt {
 
     //从classpath中获取anbo_pub_key.json文件
     private static String getPubKeyStrByResources(){
-        InputStream is = AnboECCSign.class.getClass().getResourceAsStream(fileName);
+        InputStream is = AnboECCDecrypt.class.getClassLoader().getResourceAsStream(fileName);
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
         String s="";
         String configContentStr = "";

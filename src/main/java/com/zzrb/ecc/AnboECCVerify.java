@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class AnboECCVerify{
 
-    private static final String fileName = "/anbo_pub_key.json";
+    private static final String fileName = "anbo_pub_key.json";
     private static final String pubKey = "pub_key";
     private static final String value = "value";
 
@@ -25,7 +25,7 @@ public class AnboECCVerify{
 
     //从classpath中获取anbo_pub_key.json文件
     private static String getPubKeyStrByResources(){
-        InputStream is = AnboECCSign.class.getClass().getResourceAsStream(fileName);
+        InputStream is = AnboECCVerify.class.getClassLoader().getResourceAsStream(fileName);
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
         String s="";
         String configContentStr = "";
