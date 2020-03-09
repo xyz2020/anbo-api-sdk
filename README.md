@@ -2,8 +2,30 @@
 
 ## 运行环境
 
-1. JDK版本1.8及以上
+1. JDK版本要求必须是JDK 8u211及以上
 2. 编译工具maven
+3. 可预见问题处理方案
+
+    > 如果在用JDK版本不满足版本要求,又不能对JDK版本进行升级.请参照如下步骤操作解决可能会出现的问题:
+
+    ```
+    java.security.InvalidKeyException: Illegal key size or default parameters
+    at javax.crypto.Cipher.checkCryptoPerm(Cipher.java:1026)
+    at javax.crypto.Cipher.implInit(Cipher.java:801)
+    at javax.crypto.Cipher.chooseProvider(Cipher.java:864)
+    at javax.crypto.Cipher.init(Cipher.java:1249)
+    at javax.crypto.Cipher.init(Cipher.java:1186)
+    ```
+
+    > 因为超出了JDK 默认的秘钥长度，若需放开，则需要更新 JDK 中相应的 jar 文件（local_policy.jar 、US_export_policy.jar），相应的下载链接如下所示：
+
+    http://www.oracle.com/technetwork/java/javase/downloads/jce-6-download-429243.html
+
+    http://www.oracle.com/technetwork/java/javase/downloads/jce-7-download-432124.html
+
+    http://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html
+
+    > 请依据相应安装的 JDK 版本进行下载，下载后解压到 JDK 安装目录下的 jre/lib/security 文件夹下，重启应用即可。
 
 ## 获取SDK方式
 
@@ -23,11 +45,10 @@
 
 ## 私钥文件说明(平台发放,使用者妥善保管)
 
-> 将私钥文件放置到项目的资源文件夹（resources）下.
-
     使用者注意：
-    1. 文件名称要求必须是key_pair.json。
-    2. 该私钥文件文件必须由开发者跟项目方申请，才能做api联调，自己创建的公私钥无法联调。项目方会进行公私钥的备案。
+    1. 将私钥文件放置到项目的资源文件夹（resources）下 
+    2. 文件名称要求必须是key_pair.json。
+    3. 该私钥文件文件必须由开发者跟项目方申请，才能做api联调，自己创建的公私钥无法联调。项目方会进行公私钥的备案。
 
 私钥文件内容示例:
 
@@ -44,20 +65,32 @@
 }
 ```
 
-## 平台公钥文件(SDK中默认带有平台公钥)
+## 平台公钥文件(平台发放,使用者保管)
 
-    注意:
+    使用说明:
     1.公钥文件放置在项目的资源文件夹（resources）下
     2.公钥文件名称:anbo_pub_key.json
-    3.公钥文件中仅包含平台公钥,用于在调用api接口时对数据进行加密.
+    3.公钥文件中仅包含平台公钥,用于在调用api接口时对数据进行加密,如有需要也可以进行验签.
+    4.在进行与平台对接时候,选择正确的公钥文件,区分测试环境与生产环境.
 
-公钥文件内容示例:
+测试环境公钥文件:
 
 ```json
 {
   "pub_key":{
     "type": "anbo/PubKeyECC",
-    "value":"MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE53lyyN40JUzGgmS4Qzk+nNnmbIpKBSqFG5B1zDKdUN/BZ/snCWbpvGtOW9k94PbxGv0LRxKFS8QLsFw7bd0+Qw=="
+    "value":"MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAErbiXIiqY2q1oFZ2Ra4hVk1CotKEDHKQx1/rTgOGMNqq7nHjAEKoXW6qPDCSySJKFST+RWvGsBzHGUEPpXCwlLw=="
+  }
+}
+```
+
+生产环境公钥文件:
+
+```json
+{
+  "pub_key":{
+    "type": "anbo/PubKeyECC",
+    "value":"MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEP8oOm7jIx5HSNozIIjHKytaEy/a5VJksrhjYClmue/p9YRC0v+zVP2ajSoKPmnYoz6SV0MvzwlzzUUU5ZJiOnA=="
   }
 }
 ```
@@ -109,9 +142,8 @@
         map.put("bankName","招商银行");
         map.put("accountNo","6225888888888888");
         map.put("accountName","张三");
-        String sign = "MEUCIQCOPHb+g+jTgcPHApVxBZn4ducOXknNOkjK2oZQQhX+MwIgbnIzi/+cZzm9388t3fK6FWpYsjGsgveAPfMDFS+IKPk=";
-        String pubKey = "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE53lyyN40JUzGgmS4Qzk+nNnmbIpKBSqFG5B1zDKdUN/BZ/snCWbpvGtOW9k94PbxGv0LRxKFS8QLsFw7bd0+Qw==";
-        Boolean check = anboECCVerify.verify(pubKey,map,sign);
+        String sign = "MEUCIQCAG2o5crFVilasvP4GmaiW+uHID85+unieDFPl6kdvXwIgS/w+kXXCaqtehBccy2eGPPJhbm/INYGYLQYg7ly7Bio=";
+        Boolean check = anboECCVerify.verify(map,sign);
         System.out.println("check:"+check);
 ```
 

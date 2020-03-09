@@ -2,8 +2,8 @@ package com.zzrb.enumm;
 
 public enum AdPosStatusEnum {
 
-    ON("停用",0),
-    OFF("启用",1);
+    OFF("停用",0),
+    ON("启用",1);
 
     private String name;
     private int code;
