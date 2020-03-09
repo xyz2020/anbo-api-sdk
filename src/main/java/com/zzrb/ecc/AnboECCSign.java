@@ -12,7 +12,7 @@ import java.util.*;
 public class AnboECCSign{
 
     //私钥文件
-    private static final String fileName = "/key_pair.json";
+    private static final String fileName = "key_pair.json";
     private static final String privKey = "priv_key";
     private static final String value = "value";
 
@@ -25,7 +25,7 @@ public class AnboECCSign{
 
     //从classpath中获取private_key.json文件
     private static String getPrivateKeyStrByResources(){
-        InputStream is = AnboECCSign.class.getClass().getResourceAsStream(fileName);
+        InputStream is = AnboECCSign.class.getClassLoader().getResourceAsStream(fileName);
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
         String s="";
         String configContentStr = "";
@@ -43,6 +43,17 @@ public class AnboECCSign{
     //执行签名
     public String sign(Map<String,String> data) throws Exception {
         ECPrivateKey privateKey = ECCUtil.string2PrivateKey(privateKeyStr);
+        byte[] dataBytes = ECCUtil.dataMap2byte(data);
+        // 2.执行签名[私钥签名]
+        Signature signature = Signature.getInstance(ECCUtil.SIGNALGORITHM, ECCUtil.BC);
+        signature.initSign(privateKey);
+        signature.update(dataBytes);
+        return Base64.getEncoder().encodeToString(signature.sign());
+    }
+
+    //执行签名
+    public String sign(String privKey, Map<String,String> data) throws Exception {
+        ECPrivateKey privateKey = ECCUtil.string2PrivateKey(privKey);
         byte[] dataBytes = ECCUtil.dataMap2byte(data);
         // 2.执行签名[私钥签名]
         Signature signature = Signature.getInstance(ECCUtil.SIGNALGORITHM, ECCUtil.BC);

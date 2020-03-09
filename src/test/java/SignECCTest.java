@@ -25,21 +25,24 @@ public class SignECCTest {
 
     @Test
     public void genKeyPair() throws Exception {
-        String keyPair = AnboECCKey.generateKeyPair();
-        System.out.println(keyPair);
+            String keyPair = AnboECCKey.generateKeyPair();
+            System.out.println(keyPair);
     }
 
     @Test
     public void sign() throws Exception {
         AnboECCSign anboECCSign = new AnboECCSign();
         Map<String,String> map = new HashMap<>();
+
+        String[] s = {"1","2"};
         map.put("accountType","1");
         map.put("address","北京市朝阳区中电发展大厦");
         map.put("name","张三");
         map.put("bankName","招商银行");
         map.put("accountNo","6225888888888888");
         map.put("accountName","张三");
-        System.out.println("map:"+map);
+        map.put("list",s.toString());
+        System.out.println("map:"+map.get("list"));
 
         String sign = anboECCSign.sign(map);
         System.out.println("sign:"+sign);
@@ -49,14 +52,16 @@ public class SignECCTest {
     public void check() throws Exception{
         AnboECCVerify anboECCVerify = new AnboECCVerify();
         Map<String,String> map = new HashMap<>();
+        String[] s = {"1","2"};
         map.put("accountType","1");
         map.put("address","北京市朝阳区中电发展大厦");
         map.put("name","张三");
         map.put("bankName","招商银行");
         map.put("accountNo","6225888888888888");
         map.put("accountName","张三");
-        String sign = "MEUCIQCOPHb+g+jTgcPHApVxBZn4ducOXknNOkjK2oZQQhX+MwIgbnIzi/+cZzm9388t3fK6FWpYsjGsgveAPfMDFS+IKPk=";
-        String pubKey = "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE53lyyN40JUzGgmS4Qzk+nNnmbIpKBSqFG5B1zDKdUN/BZ/snCWbpvGtOW9k94PbxGv0LRxKFS8QLsFw7bd0+Qw==";
+        map.put("list",s.toString());
+        String sign = "MEUCIQCAG2o5crFVilasvP4GmaiW+uHID85+unieDFPl6kdvXwIgS/w+kXXCaqtehBccy2eGPPJhbm/INYGYLQYg7ly7Bio=";
+        String pubKey = "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAErbiXIiqY2q1oFZ2Ra4hVk1CotKEDHKQx1/rTgOGMNqq7nHjAEKoXW6qPDCSySJKFST+RWvGsBzHGUEPpXCwlLw==";
         Boolean check = anboECCVerify.verify(pubKey,map,sign);
 
         System.out.println("check:"+check);
