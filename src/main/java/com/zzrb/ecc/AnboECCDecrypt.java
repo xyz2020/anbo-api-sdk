@@ -45,6 +45,11 @@ public class AnboECCDecrypt {
         return new String(privateDecrypt(bytes,priv_key));
     }
 
+    public String decrypt(String data, String privateKeyStr) throws Exception {
+        byte[] bytes = Base64.getDecoder().decode(data);
+        return new String(privateDecrypt(bytes,privateKeyStr));
+    }
+
     //私钥解密
     private byte[] privateDecrypt(byte[] data, String privateKeyStr) throws Exception{
         ECPrivateKey privateKey = ECCUtil.string2PrivateKey(privateKeyStr);

@@ -51,4 +51,15 @@ public class AnboECCSign{
         return Base64.getEncoder().encodeToString(signature.sign());
     }
 
+    //执行签名
+    public String sign(String privKey, Map<String,String> data) throws Exception {
+        ECPrivateKey privateKey = ECCUtil.string2PrivateKey(privKey);
+        byte[] dataBytes = ECCUtil.dataMap2byte(data);
+        // 2.执行签名[私钥签名]
+        Signature signature = Signature.getInstance(ECCUtil.SIGNALGORITHM, ECCUtil.BC);
+        signature.initSign(privateKey);
+        signature.update(dataBytes);
+        return Base64.getEncoder().encodeToString(signature.sign());
+    }
+
 }
