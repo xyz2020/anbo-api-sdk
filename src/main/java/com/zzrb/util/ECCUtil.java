@@ -26,7 +26,7 @@ public class ECCUtil {
 
     //将Base64编码后的公钥转换成PublicKey对象
     public static ECPublicKey string2PublicKey(String pubStr) throws Exception{
-        byte[] keyBytes = Base64.getDecoder().decode(pubStr.getBytes(StandardCharsets.UTF_8));
+        byte[] keyBytes = Base64.getDecoder().decode(pubStr.getBytes());
         X509EncodedKeySpec keySpec = new X509EncodedKeySpec(keyBytes);
         KeyFactory keyFactory = KeyFactory.getInstance(EC,BC);
         return (ECPublicKey) keyFactory.generatePublic(keySpec);
@@ -34,7 +34,7 @@ public class ECCUtil {
 
     //将Base64编码后的私钥转换成PrivateKey对象
     public static ECPrivateKey string2PrivateKey(String priStr) throws Exception{
-        byte[] keyBytes = Base64.getDecoder().decode(priStr.getBytes(StandardCharsets.UTF_8));
+        byte[] keyBytes = Base64.getDecoder().decode(priStr.getBytes());
         PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(keyBytes);
         KeyFactory keyFactory = KeyFactory.getInstance(EC,BC);
         return (ECPrivateKey) keyFactory.generatePrivate(keySpec);
