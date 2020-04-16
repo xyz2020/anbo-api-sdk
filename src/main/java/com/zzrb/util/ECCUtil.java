@@ -4,6 +4,7 @@ import org.bouncycastle.jce.interfaces.ECPrivateKey;
 import org.bouncycastle.jce.interfaces.ECPublicKey;
 
 import javax.crypto.Cipher;
+import java.nio.charset.StandardCharsets;
 import java.security.*;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
@@ -25,20 +26,23 @@ public class ECCUtil {
 
     //将Base64编码后的公钥转换成PublicKey对象
     public static ECPublicKey string2PublicKey(String pubStr) throws Exception{
-        byte[] keyBytes = Base64.getDecoder().decode(pubStr);
+        byte[] keyBytes = Base64.getDecoder().decode(pubStr.getBytes(StandardCharsets.UTF_8));
         X509EncodedKeySpec keySpec = new X509EncodedKeySpec(keyBytes);
         KeyFactory keyFactory = KeyFactory.getInstance(EC,BC);
-        ECPublicKey publicKey = (ECPublicKey) keyFactory.generatePublic(keySpec);
-        return publicKey;
+        return (ECPublicKey) keyFactory.generatePublic(keySpec);
     }
 
     //将Base64编码后的私钥转换成PrivateKey对象
     public static ECPrivateKey string2PrivateKey(String priStr) throws Exception{
-        byte[] keyBytes = Base64.getDecoder().decode(priStr);
+        byte[] keyBytes = Base64.getDecoder().decode(priStr.getBytes(StandardCharsets.UTF_8));
         PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(keyBytes);
         KeyFactory keyFactory = KeyFactory.getInstance(EC,BC);
-        ECPrivateKey privateKey = (ECPrivateKey) keyFactory.generatePrivate(keySpec);
-        return privateKey;
+        return (ECPrivateKey) keyFactory.generatePrivate(keySpec);
+    }
+
+    //默认采用UTF-8编码
+    public static byte[] string2Bytes(String data){
+        return data.getBytes(StandardCharsets.UTF_8);
     }
 
     // 源数据的map,排序，拼接字符串：k1=v1k2=v2k3=v3,返回byte数组
@@ -52,6 +56,6 @@ public class ECCUtil {
         for (Map.Entry<String, String> param : entrys) {
             basestring.append(param.getKey()).append("=").append(param.getValue());
         }
-        return basestring.toString().getBytes();
+        return basestring.toString().getBytes(StandardCharsets.UTF_8);
     }
 }

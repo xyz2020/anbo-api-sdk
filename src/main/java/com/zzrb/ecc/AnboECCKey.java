@@ -33,17 +33,16 @@ public class AnboECCKey{
 
     // 公私钥生成
     private static KeyPair initKey() throws Exception {
-        return initKey(ECCUtil.KEYSIZE, new SecureRandom().generateSeed(8));
+        return initKey(new SecureRandom().generateSeed(8));
     }
 
-    private static KeyPair initKey(int keySize, byte[] seed) throws Exception {
+    private static KeyPair initKey(byte[] seed) throws Exception {
         KeyPairGenerator keygen = KeyPairGenerator.getInstance(ECCUtil.EC,ECCUtil.BC);
         // 初始化随机产生器
         SecureRandom secureRandom = new SecureRandom();
         secureRandom.setSeed(seed);
-        keygen.initialize(keySize, secureRandom);
-        KeyPair keys = keygen.genKeyPair();
-        return keys;
+        keygen.initialize(ECCUtil.KEYSIZE, secureRandom);
+        return keygen.genKeyPair();
     }
 
     //获取公钥(Base64编码)

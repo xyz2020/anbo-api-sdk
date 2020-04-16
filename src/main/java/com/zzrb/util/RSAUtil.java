@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSONObject;
 import org.bouncycastle.jce.interfaces.ECPrivateKey;
 import org.bouncycastle.jce.interfaces.ECPublicKey;
 
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.security.*;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
@@ -13,12 +15,13 @@ import java.util.Base64;
 
 public class RSAUtil {
 
+    public static final Charset UTF_8 = StandardCharsets.UTF_8;
+
     // 创建rsa公私钥对
     public static KeyPair initKeyPair() throws Exception {
         KeyPairGenerator generator = KeyPairGenerator.getInstance("RSA");
         generator.initialize(1024, new SecureRandom());
-        KeyPair pair = generator.generateKeyPair();
-        return pair;
+        return generator.generateKeyPair();
     }
 
     public static String generateKeyPair() throws Exception {
@@ -57,8 +60,7 @@ public class RSAUtil {
         byte[] keyBytes = Base64.getDecoder().decode(pubStr);
         X509EncodedKeySpec keySpec = new X509EncodedKeySpec(keyBytes);
         KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-        RSAPublicKey publicKey = (RSAPublicKey) keyFactory.generatePublic(keySpec);
-        return publicKey;
+        return (RSAPublicKey) keyFactory.generatePublic(keySpec);
     }
 
     //将Base64编码后的私钥转换成PrivateKey对象
@@ -66,8 +68,7 @@ public class RSAUtil {
         byte[] keyBytes = Base64.getDecoder().decode(priStr);
         PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(keyBytes);
         KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-        RSAPrivateKey privateKey = (RSAPrivateKey) keyFactory.generatePrivate(keySpec);
-        return privateKey;
+        return (RSAPrivateKey) keyFactory.generatePrivate(keySpec);
     }
 
 }

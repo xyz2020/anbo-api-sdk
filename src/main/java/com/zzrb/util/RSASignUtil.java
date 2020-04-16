@@ -1,5 +1,7 @@
 package com.zzrb.util;
 
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.Signature;
@@ -7,8 +9,6 @@ import java.util.Base64;
 
 public class RSASignUtil {
 
-
-    private static String UTF_8 = "UTF-8";
 
     public static String sign(String plainText, String privateKeyStr) throws Exception {
         PrivateKey privateKey = RSAUtil.string2PrivateKey(privateKeyStr);
@@ -23,7 +23,7 @@ public class RSASignUtil {
     public static String sign(String plainText, PrivateKey privateKey) throws Exception {
         Signature privateSignature = Signature.getInstance("SHA256withRSA");
         privateSignature.initSign(privateKey);
-        privateSignature.update(plainText.getBytes(UTF_8));
+        privateSignature.update(plainText.getBytes(RSAUtil.UTF_8));
 
         byte[] signature = privateSignature.sign();
 
@@ -33,7 +33,7 @@ public class RSASignUtil {
     public static boolean verify(String plainText, String signature, PublicKey publicKey) throws Exception {
         Signature publicSignature = Signature.getInstance("SHA256withRSA");
         publicSignature.initVerify(publicKey);
-        publicSignature.update(plainText.getBytes(UTF_8));
+        publicSignature.update(plainText.getBytes(RSAUtil.UTF_8));
 
         byte[] signatureBytes = Base64.getDecoder().decode(signature);
 

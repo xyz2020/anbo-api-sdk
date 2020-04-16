@@ -16,7 +16,11 @@ public class AnboECCSign{
     private static String privateKeyStr;
 
     static {
-        privateKeyStr = FileUtil.getKeyStrByResources(fileName,privKey,value);
+        try {
+            privateKeyStr = FileUtil.getKeyStrByResources(fileName,privKey,value);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     //执行签名
