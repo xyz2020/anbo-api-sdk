@@ -6,7 +6,19 @@
 
     <groupId>com.zzrb.ecc</groupId>
     <artifactId>anbo-sdk</artifactId>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
+    <packaging>jar</packaging>
+
+    <distributionManagement>
+        <repository>
+            <id>qianbao-aliyun-releases</id>
+            <url>http://maven.restful.club/repository/maven-releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>qianbao-aliyun-snapshots</id>
+            <url>http://maven.restful.club/repository/maven-snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
 
     <build>
         <plugins>
