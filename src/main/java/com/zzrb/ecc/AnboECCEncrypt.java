@@ -1,8 +1,10 @@
 package com.zzrb.ecc;
 
 import com.zzrb.util.ECCCryptUtil;
+import com.zzrb.util.ECCUtil;
 import com.zzrb.util.FileUtil;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 public class AnboECCEncrypt {
@@ -13,14 +15,17 @@ public class AnboECCEncrypt {
 
     private static String anbo_pub_key;
     static {
-        anbo_pub_key = FileUtil.getKeyStrByResources(fileName,pubKey,value);
+        try {
+            anbo_pub_key = FileUtil.getKeyStrByResources(fileName,pubKey,value);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     //使用sdk中默认平台公钥加密
     public String encrypt(String data) throws Exception {
-        byte[] bytes = ECCCryptUtil.publicEncrypt(data.getBytes(),anbo_pub_key);
+        byte[] bytes = ECCCryptUtil.publicEncrypt(ECCUtil.string2Bytes(data),anbo_pub_key);
         return Base64.getEncoder().encodeToString(bytes);
-
     }
 
 }

@@ -165,7 +165,7 @@ public enum CityIdEnum {
     XINYANG("信阳","0376"),
     ZHOUKOU("周口","0394"),
     ZHUMADIAN("驻马店","0396"),
-    WUHAN("武汉",""),
+    WUHAN("武汉","027"),
     HUANGSHI("黄石","0714"),
     SHIYAN("十堰","0719"),
     YICHANG("宜昌","0717"),

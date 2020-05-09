@@ -13,7 +13,11 @@ public class AnboECCVerify{
 
     private static String anbo_pub_key;
     static {
-        anbo_pub_key = FileUtil.getKeyStrByResources(fileName,pubKey,value);
+        try {
+            anbo_pub_key = FileUtil.getKeyStrByResources(fileName,pubKey,value);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     // 使用sdk默认的平台公钥验签
