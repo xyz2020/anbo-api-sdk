@@ -12,11 +12,13 @@ public class ECCCryptUtil {
 
     public static String encrypt(String data, String publicKeyStr) throws Exception {
         byte[] bytes = publicEncrypt(ECCUtil.string2Bytes(data),publicKeyStr);
-        return Base64.getEncoder().encodeToString(bytes);
+        String eStr = Base64.getEncoder().encodeToString(bytes);
+        return ECCUtil.strConvertBase(eStr);
     }
 
     public static String decrypt(String data, String privateKeyStr) throws Exception {
-        byte[] bytes = Base64.getDecoder().decode(ECCUtil.string2Bytes(data));
+        String dstr = ECCUtil.baseConvertStr(data);
+        byte[] bytes = Base64.getDecoder().decode(ECCUtil.string2Bytes(dstr));
         return new String(privateDecrypt(bytes,privateKeyStr));
     }
 

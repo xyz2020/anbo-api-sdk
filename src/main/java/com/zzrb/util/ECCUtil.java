@@ -3,7 +3,6 @@ package com.zzrb.util;
 import org.bouncycastle.jce.interfaces.ECPrivateKey;
 import org.bouncycastle.jce.interfaces.ECPublicKey;
 
-import javax.crypto.Cipher;
 import java.nio.charset.StandardCharsets;
 import java.security.*;
 import java.security.spec.PKCS8EncodedKeySpec;
@@ -57,5 +56,23 @@ public class ECCUtil {
             basestring.append(param.getKey()).append("=").append(param.getValue());
         }
         return basestring.toString().getBytes(StandardCharsets.UTF_8);
+    }
+
+    //base64编码
+    public static String strConvertBase(String str) {
+        if(null != str){
+            Base64.Encoder encoder = Base64.getEncoder();
+            return encoder.encodeToString(str.getBytes());
+        }
+        return null;
+    }
+
+    //base64解码
+    public static String baseConvertStr(String str) {
+        if(null != str){
+            Base64.Decoder decoder = Base64.getDecoder();
+            return new String(decoder.decode(str.getBytes()), StandardCharsets.UTF_8);
+        }
+        return null;
     }
 }

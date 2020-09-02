@@ -17,13 +17,15 @@ public class ECCSignUtil {
         Signature signature = Signature.getInstance(ECCUtil.SIGNALGORITHM, ECCUtil.BC);
         signature.initSign(privateKey);
         signature.update(dataBytes);
-        return Base64.getEncoder().encodeToString(signature.sign());
+        String sign = Base64.getEncoder().encodeToString(signature.sign());
+        return ECCUtil.strConvertBase(sign);
     }
 
     // 验证签名，传入公钥
     public static boolean verify(String publKeyStr, Map<String,String> data, String sign) throws Exception {
         ECPublicKey publicKey = ECCUtil.string2PublicKey(publKeyStr);
-        byte[] signBytes = Base64.getDecoder().decode(sign);
+        String signTemp = ECCUtil.baseConvertStr(sign);
+        byte[] signBytes = Base64.getDecoder().decode(signTemp);
         byte[] dataBytes = ECCUtil.dataMap2byte(data);
 
         Signature signature = Signature.getInstance(ECCUtil.SIGNALGORITHM,ECCUtil.BC);
