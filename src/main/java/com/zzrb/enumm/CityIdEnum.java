@@ -233,8 +233,8 @@ public enum CityIdEnum {
     LAIBIN("来宾","0772"),
     CHONGZUO("崇左","0771"),
     HAIKOU("海口","0898"),
-    SANYA("三亚","0898"),
-    SANSHA("三沙","0898"),
+    SANYA("三亚","08982"),
+    SANSHA("三沙","08983"),
     CHONGQING("重庆","023"),
     LIANGJIANGXINQU("两江新区","023"),
     CHENGDU("成都","028"),
@@ -366,7 +366,23 @@ public enum CityIdEnum {
     NEWTERRITORIES("新界","00852"),
     MACAUPENINSULA("澳门半岛","00853"),
     TAIPA("氹仔岛","00853"),
-    COLOANE("路环岛","00853");
+    COLOANE("路环岛","00853"),
+    WUZHISHAN("五指山","089801"),
+    QIONGHAI("琼海","089802"),
+    DANZHOU("儋州","089803"),
+    WENCHANG("文昌","089805"),
+    WANNING("万宁","089806"),
+    DONGFANG("东方","089807"),
+    DINGAN("定安","089821"),
+    TUNCHANG("屯昌","089822"),
+    CHENGMAI("澄迈","089823"),
+    LINGAO("临高","089824"),
+    BAISHA("白沙","089825"),
+    CHANGJIANG("昌江","089826"),
+    LEDONG("乐东","089827"),
+    LINGSHUI("陵水","089828"),
+    BAOTING("保亭","089829"),
+    QIONGZHONG("琼中","089830");
 
     private String name;
     private String code;
