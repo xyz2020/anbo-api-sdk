@@ -1,6 +1,14 @@
 package com.zzrb.enumm;
 
+/**
+ * description: CityIdEnum <br>
+ * date: 2020/11/5 3:52 下午 <br>
+ * author: kuan <br>
+ * version: 该枚举类弃用，请使用CityCodeEnum <br>
+ */
+@Deprecated
 public enum CityIdEnum {
+
     BEIJING("北京","010"),
     TIANJIN("天津","022"),
     SHIJIAZHUANG("石家庄","0311"),
