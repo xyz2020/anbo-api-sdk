@@ -1,13 +1,10 @@
 import com.zzrb.ecc.*;
-import com.zzrb.enumm.CityIdEnum;
 import com.zzrb.util.ECCCryptUtil;
 import com.zzrb.util.ECCSignUtil;
 import org.junit.Test;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class ECCTest {
 
