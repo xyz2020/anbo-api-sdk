@@ -110,7 +110,7 @@ public enum CityIdEnumOld {
     ZHOUSHAN("舟山","0580"),
     LISHUI("丽水","0578"),
     HEFEI("合肥","0551"),
-    WUHU("芜湖","0551"),
+    WUHU("芜湖","0553"),
     BENGBU("蚌埠","0552"),
     HUAINAN("淮南","0554"),
     MAANSHAN("马鞍山","0555"),
